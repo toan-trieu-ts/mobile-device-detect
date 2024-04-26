@@ -1,11 +1,16 @@
 {
   "name": "mobile-device-detect",
-  "version": "0.4.3",
+  "version": "1.0.0",
   "description": "Helpers for handling mobile devices",
   "main": "dist/index.js",
   "typings": "./index.d.ts",
   "license": "MIT",
   "repository": {
+    "type": "git",
+    "url": "https://github.com/toan-trieu-ts/mobile-device-detect/",
+    "originalUrl": "https://github.com/duskload/mobile-device-detect/"
+  },
+  "originalRepository": {
     "type": "git",
     "url": "https://github.com/duskload/mobile-device-detect/"
   },
@@ -28,6 +33,10 @@
     "build": "webpack"
   },
   "author": {
+    "name": "Toan Trieu",
+    "email": "toan.trieu@trustingsocial.com"
+  },
+  "originalAuthor": {
     "name": "Michael Laktionov",
     "email": "duskload@gmail.com"
   },
