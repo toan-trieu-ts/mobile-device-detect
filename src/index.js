@@ -1,6 +1,6 @@
-const UAParser = require("../node_modules/ua-parser-js/dist/ua-parser.min");
-const { BROWSER_TYPES, OS_TYPES, DEVICE_TYPES } = require("./constants");
-const {
+import UAParser from "ua-parser-js";
+import { BROWSER_TYPES, OS_TYPES, DEVICE_TYPES } from "./constants";
+import {
   checkType,
   broPayload,
   mobilePayload,
@@ -8,8 +8,8 @@ const {
   consolePayload,
   stvPayload,
   getNavigatorInstance,
-  isIOS13Check
-} = require("./utils")
+  isIOS13Check,
+} from "./utils";
 
 const UA = new UAParser();
 
@@ -29,7 +29,7 @@ const {
   SAFARI,
   EDGE,
   YANDEX,
-  MOBILE_SAFARI
+  MOBILE_SAFARI,
 } = BROWSER_TYPES;
 const { MOBILE, TABLET, SMART_TV, BROWSER, WEARABLE, CONSOLE } = DEVICE_TYPES;
 const { ANDROID, WINDOWS_PHONE, IOS, WINDOWS, MAC_OS } = OS_TYPES;
@@ -48,8 +48,8 @@ const isMobileAndTabletType = () => {
 };
 
 const isEdgeChromiumType = () => {
-  if (os.name === OS_TYPES.WINDOWS && os.version === '10') {
-    return typeof ua === 'string' && ua.indexOf('Edg/') !== -1;
+  if (os.name === OS_TYPES.WINDOWS && os.version === "10") {
+    return typeof ua === "string" && ua.indexOf("Edg/") !== -1;
   }
 
   return false;
@@ -81,21 +81,22 @@ const isElectronType = () => {
   const nav = getNavigatorInstance();
   const ua = nav && nav.userAgent.toLowerCase();
 
-  return typeof ua === 'string' ? /electron/.test(ua) : false;
+  return typeof ua === "string" ? /electron/.test(ua) : false;
 };
 
 const getIOS13 = () => {
   const nav = getNavigatorInstance();
   return (
     nav &&
-    (/iPad|iPhone|iPod/.test(nav.platform) || (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1)) &&
+    (/iPad|iPhone|iPod/.test(nav.platform) ||
+      (nav.platform === "MacIntel" && nav.maxTouchPoints > 1)) &&
     !window.MSStream
   );
 };
 
-const getIPad13 = () => isIOS13Check('iPad');
-const getIphone13 = () => isIOS13Check('iPhone');
-const getIPod13 = () => isIOS13Check('iPod');
+const getIPad13 = () => isIOS13Check("iPad");
+const getIphone13 = () => isIOS13Check("iPhone");
+const getIPod13 = () => isIOS13Check("iPod");
 
 const getBrowserFullVersion = () => browser.major;
 const getBrowserVersion = () => browser.version;
@@ -151,15 +152,9 @@ const isMacOs = isMacOsType();
 
 const type = checkType(device.type);
 
-function deviceDetect () {
-  const {
-    isBrowser,
-    isMobile,
-    isTablet,
-    isSmartTV,
-    isConsole,
-    isWearable
-  } = type;
+function deviceDetect() {
+  const { isBrowser, isMobile, isTablet, isSmartTV, isConsole, isWearable } =
+    type;
   if (isBrowser) {
     return broPayload(isBrowser, browser, engine, os, ua);
   }
@@ -183,9 +178,9 @@ function deviceDetect () {
   if (isWearable) {
     return wearPayload(isWearable, engine, os, ua);
   }
-};
+}
 
-module.exports = {
+export {
   deviceDetect,
   isSmartTV,
   isConsole,
@@ -225,5 +220,5 @@ module.exports = {
   isEdgeChromium,
   isLegacyEdge,
   isWindows,
-  isMacOs
+  isMacOs,
 };

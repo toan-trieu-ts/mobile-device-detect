@@ -38,4 +38,4 @@ const defaultData = {
   isWearable: false
 };
 
-module.exports = { BROWSER_TYPES, DEVICE_TYPES, OS_TYPES, defaultData };
+export { BROWSER_TYPES, DEVICE_TYPES, OS_TYPES, defaultData };
